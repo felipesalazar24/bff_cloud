@@ -9,7 +9,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String password;
-    private int phoneNumber;
+    private Long phoneNumber;
     private String address;
     private int addressNumber;
     private String city;

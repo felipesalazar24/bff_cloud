@@ -22,6 +22,11 @@ public class PetController {
         return ResponseEntity.ok(petService.findAllPets());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PetDTO> getPetById(@PathVariable Long id) {
+        return ResponseEntity.ok(petService.getPetById(id));
+    }
+
     @PostMapping
     public ResponseEntity<PetDTO> createPet(@RequestBody PetDTO pet) {
         PetDTO savedPet = petService.savePet(pet);
@@ -29,6 +34,17 @@ public class PetController {
         System.out.println("[MS-NOTIFICATION MOCK] -> Enviando alerta masiva de mascota perdida: " + savedPet.getName());
         
         return ResponseEntity.ok(savedPet);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PetDTO> updatePet(@PathVariable Long id, @RequestBody PetDTO pet) {
+        return ResponseEntity.ok(petService.updatePet(id, pet));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePet(@PathVariable Long id) {
+        petService.deletePet(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/pet-types")

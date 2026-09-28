@@ -36,6 +36,15 @@ public class PetClient {
         return restTemplate.postForObject(baseUrl, pet, PetDTO.class);
     }
 
+    public PetDTO updatePet(Long id, PetDTO pet) {
+        restTemplate.put(baseUrl + "/" + id, pet);
+        return getPetById(id);
+    }
+
+    public void deletePet(Long id) {
+        restTemplate.delete(baseUrl + "/" + id);
+    }
+
     // --- Métodos de Tipo Mascota ---
     public List<PetTypeDTO> getAllPetTypes() {
         PetTypeDTO[] response = restTemplate.getForObject(typeUrl, PetTypeDTO[].class);

@@ -16,8 +16,14 @@ public class PetService {
     }
 
     public List<PetDTO> findAllPets() { return petClient.getAllPets(); }
+
+    public PetDTO getPetById(Long id) { return petClient.getPetById(id); }
     
     public PetDTO savePet(PetDTO Pet) { return petClient.createPet(Pet); }
+
+    public PetDTO updatePet(Long id, PetDTO pet) { return petClient.updatePet(id, pet); }
+
+    public void deletePet(Long id) { petClient.deletePet(id); }
 
     public List<PetTypeDTO> findAllTypes() { return petClient.getAllPetTypes(); }
 
