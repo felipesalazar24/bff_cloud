@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bff-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bff
+  template:
+    metadata:
+      labels:
+        app: bff
+    spec:
+      containers:
+      - name: bff
+        image: tu-registro-aws/bff:latest
+        ports:
+        - containerPort: 8084
+        env:
+        - name: USERS_URL
+          value: "http://ms-user-service:8081"
+        - name: PETS_URL
+          value: "http://ms-pet-service:8082"
+        - name: FRONTEND_URL
+          value: "*"
