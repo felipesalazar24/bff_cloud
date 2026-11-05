@@ -35,7 +35,8 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/health").permitAll()
-                .requestMatchers("/api/admin/**").hasAuthority("APPROLE_Admin")
+                // La ruta del administrador en el BFF requiere explícitamente el rol de admin
+                .requestMatchers("/api/v1/bff/admin/**").hasAuthority("APPROLE_admin")
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> 
