@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bff-deployment
+  labels:
+    app: bff
 spec:
   replicas: 1
   selector:
@@ -12,15 +14,31 @@ spec:
       labels:
         app: bff
     spec:
-      containers:
-      - name: bff
-        image: felipesalazar24/bff:latest
-        ports:
-        - containerPort: 8084
-        env:
-        - name: USERS_URL
-          value: "http://ms-user-service:8081"
-        - name: PETS_URL
-          value: "http://ms-pet-service:8082"
-        - name: FRONTEND_URL
-          value: "*"
+      - containers:
+        - name: bff
+          image: felipesalazar24/bff:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8084
+          env:
+            - name: USERS_URL
+              value: "http://ms-user-service:8081"
+            - name: PETS_URL
+              value: "http://ms-pet-service:8082"
+            - name: ADMIN_URL
+              value: "http://ms-admin-service:8085"
+            - name: FRONTEND_URL
+              value: "*"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bff-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: bff
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084
