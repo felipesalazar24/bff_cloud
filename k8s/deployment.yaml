@@ -14,7 +14,7 @@ spec:
       labels:
         app: bff
     spec:
-      - containers:
+      containers:
         - name: bff
           image: felipesalazar24/bff:latest
           imagePullPolicy: Always
