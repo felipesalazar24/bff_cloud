@@ -39,6 +39,11 @@ spec:
   selector:
     app: bff
   ports:
-    - protocol: TCP
-      port: 8084
-      targetPort: 8084
+  - name: http
+    protocol: TCP
+    port: 8084
+    targetPort: 8084
+  - name: management
+    protocol: TCP
+    port: 8085
+    targetPort: 8085
