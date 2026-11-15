@@ -29,3 +29,16 @@ spec:
               value: "http://ms-admin-service:8085"
             - name: FRONTEND_URL
               value: "*"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bff-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: bff
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084
